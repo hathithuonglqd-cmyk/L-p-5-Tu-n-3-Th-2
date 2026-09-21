@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trò Chơi Học Tập Tuần 3 - Lớp 2</title>
+  <!-- Nhúng Font chữ Tiếng Việt đẹp, hiển thị chuẩn -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #FF7B9C;
+      --secondary: #FFC6C7;
+      --accent-yellow: #FFD166;
+      --accent-blue: #4EA8DE;
+      --accent-green: #06D6A0;
+      --bg-color: #FFF5F7;
+      --card-bg: #FFFFFF;
+      --text-color: #4A4E69;
+      --correct-bg: #D4EDDA;
+      --correct-border: #28A745;
+      --wrong-bg: #F8D7DA;
+      --wrong-border: #DC3545;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Nunito', 'Fredoka', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%);
+      min-height: 100vh;
+      margin: 0;
+      padding: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--text-color);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      background-color: var(--card-bg);
+      border-radius: 25px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+      padding: 30px;
+      position: relative;
+      border: 5px solid #FFFFFF;
+    }
+
+    h1 {
+      font-family: 'Fredoka', cursive;
+      text-align: center;
+      color: #FF477E;
+      font-size: 30px;
+      margin-top: 0;
+    }
+
+    h2.subject-title {
+      font-family: 'Fredoka', cursive;
+      background: linear-gradient(90deg, #FF8BA7, #FFC6C7);
+      color: #FFF;
+      padding: 10px 20px;
+      border-radius: 15px;
+      margin-top: 30px;
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Màn hình Đăng Nhập */
+    .login-box {
+      text-align: center;
+      padding: 20px 10px;
+    }
+
+    .avatar-welcome {
+      font-size: 75px;
+      margin-bottom: 10px;
+      animation: float 2.5s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+      max-width: 380px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    label {
+      font-weight: 800;
+      display: block;
+      margin-bottom: 8px;
+      color: #4A4E69;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 18px;
+      border: 3px solid #E9ECEF;
+      border-radius: 15px;
+      font-size: 16px;
+      font-weight: 700;
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 10px rgba(255, 123, 156, 0.3);
+    }
+
+    .btn-start, .btn-submit {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 14px 40px;
+      font-size: 20px;
+      font-weight: 800;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 6px 0px #E65C80;
+      transition: all 0.2s;
+    }
+
+    .btn-start:hover, .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 0px #E65C80;
+    }
+
+    .btn-start:active, .btn-submit:active {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0px #E65C80;
+    }
+
+    /* Header Bar */
+    .header-bar {
+      position: sticky;
+      top: 10px;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #FFF0F3;
+      padding: 12px 20px;
+      border-radius: 18px;
+      margin-bottom: 20px;
+      font-weight: 800;
+      border: 2px solid #FFCCD5;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .timer {
+      background: var(--accent-blue);
+      color: white;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    /* Question Cards */
+    .question-card {
+      background-color: #F8F9FA;
+      border: 2px solid #E9ECEF;
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .q-title {
+      font-weight: 800;
+      color: #2B2D42;
+      font-size: 17px;
+      margin-bottom: 12px;
+    }
+
+    /* Trắc nghiệm */
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .option-btn {
+      background-color: white;
+      border: 2px solid #CED4DA;
+      padding: 10px 15px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all 0.2s;
+    }
+
+    .option-btn:hover {
+      border-color: var(--accent-blue);
+      background-color: #E0F2FE;
+    }
+
+    .option-btn.selected {
+      border-color: var(--primary);
+      background-color: #FFE5EC;
+      color: #D61C4E;
+    }
+
+    /* Điền từ */
+    .fill-input {
+      width: 130px;
+      padding: 6px 12px;
+      border: 2px solid #ADB5BD;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      text-align: center;
+      outline: none;
+      margin: 2px 4px;
+    }
+
+    /* Nối từ */
+    .match-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .match-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .match-item {
+      padding: 10px;
+      background: white;
+      border: 2px solid #CED4DA;
+      border-radius: 10px;
+      text-align: center;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .match-item.selected-left {
+      border-color: var(--accent-blue);
+      background-color: #E0F2FE;
+    }
+
+    .match-item.matched {
+      background-color: #E2F0D9;
+      border-color: #70AD47;
+      cursor: default;
+    }
+
+    /* Kéo thả */
+    .drag-box {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      background: #FFF;
+      padding: 10px;
+      border-radius: 12px;
+    }
+
+    .drag-item {
+      background-color: var(--accent-yellow);
+      color: #333;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: grab;
+      font-weight: 800;
+      box-shadow: 0 3px 0 #E5A900;
+    }
+
+    .drop-zone {
+      display: inline-block;
+      min-width: 100px;
+      height: 38px;
+      border: 2px dashed var(--accent-blue);
+      border-radius: 8px;
+      vertical-align: middle;
+      background-color: #E0F2FE;
+      text-align: center;
+      line-height: 34px;
+      font-weight: 800;
+      color: #0077B6;
+      margin: 0 4px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Bảng điểm */
+    .scoreboard {
+      background-color: #FFF0F3;
+      border: 3px solid #FFBCD1;
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .score-card {
+      background: white;
+      padding: 15px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    .score-card h3 {
+      margin: 0 0 5px 0;
+      font-size: 16px;
+    }
+
+    .score-num {
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--primary);
+    }
+
+    /* Style Phản hồi Đúng / Sai */
+    .feedback-msg {
+      margin-top: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .correct-card {
+      background-color: var(--correct-bg) !important;
+      border-color: var(--correct-border) !important;
+    }
+
+    .wrong-card {
+      background-color: var(--wrong-bg) !important;
+      border-color: var(--wrong-border) !important;
+    }
+
+    .feedback-correct {
+      color: #155724;
+      background-color: #D4EDDA;
+    }
+
+    .feedback-wrong {
+      color: #721C24;
+      background-color: #F8D7DA;
+    }
+
+    .tree-box {
+      border: 2px solid #ADB5BD;
+      border-radius: 10px;
+      padding: 10px;
+      background: #FFF;
+      display: inline-block;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  
+  <!-- MÀN HÌNH ĐĂNG NHẬP -->
+  <div id="screen-login" class="login-box">
+    <div class="avatar-welcome">🐱</div>
+    <h1>THỬ THÁCH HỌC TẬP TUẦN 3 - LỚP 2</h1>
+    <p style="font-weight: 700; color: #6C757D;">Chương trình Kết nối tri thức với cuộc sống</p>
+    
+    <div class="form-group">
+      <label for="student-name">👤 Họ và tên học sinh:</label>
+      <input type="text" id="student-name" placeholder="Ví dụ: Nguyễn Văn An..." autocomplete="off">
+    </div>
+    
+    <div class="form-group">
+      <label for="student-class">🏫 Lớp:</label>
+      <input type="text" id="student-class" placeholder="Ví dụ: 2A..." autocomplete="off">
+    </div>
+
+    <button class="btn-start" onclick="startGame()">BẮT ĐẦU VỪA HỌC VỪA CHƠI 🚀</button>
+  </div>
+
+  <!-- MÀN HÌNH BÀI TẬP -->
+  <div id="screen-quiz" class="hidden">
+    <div class="header-bar">
+      <div>👤 <span id="display-name"></span> - Lớp: <span id="display-class"></span></div>
+      <div class="timer">⏱️ <span id="time-clock">00:00</span></div>
+    </div>
+
+    <!-- MÀN HÌNH BẢNG ĐIỂM -->
+    <div id="scoreboard-box" class="scoreboard hidden">
+      <h2 style="text-align: center; color: #FF477E; margin-top:0;">🎉 KẾT QUẢ BÀI LÀM</h2>
+      <p style="text-align: center; font-weight: 800; margin-bottom: 10px;">
+        Thời gian hoàn thành: <span id="res-time" style="color: var(--accent-blue);"></span>
+      </p>
+      <div class="score-grid">
+        <div class="score-card">
+          <h3>🔢 Toán</h3>
+          <div class="score-num" id="score-math">0 / 10</div>
+        </div>
+        <div class="score-card">
+          <h3>📖 Tiếng Việt</h3>
+          <div class="score-num" id="score-tv">0 / 10</div>
+        </div>
+        <div class="score-card">
+          <h3>🔤 Tiếng Anh</h3>
+          <div class="score-num" id="score-eng">0 / 10</div>
+        </div>
+      </div>
+      <p style="text-align: center; color: #6C757D; font-weight: 700; margin-top: 15px;">
+        👇 Chi tiết chấm điểm từng câu ở phía dưới:
+      </p>
+    </div>
+
+    <form id="quiz-form">
+      
+      <!-- ==================== MÔN TOÁN (NỘI DUNG CHÍNH XÁC TỪ 3 ẢNH) ==================== -->
+      <h2 class="subject-title" style="background: linear-gradient(90deg, #4EA8DE, #90E0EF);">
+        🔢 MÔN TOÁN (LỚP 2 - ĐỀ TUẦN 3)
+      </h2>
+
+      <!-- Câu 1 Toán (Ảnh 1 - Câu 1) -->
+      <div class="question-card" id="card-m1">
+        <div class="q-title">Câu 1 (TN): Số gồm 8 chục và 9 đơn vị được viết là:</div>
+        <div class="options-grid">
+          <div class="option-btn" onclick="selectRadio('m1', 'A', this)">A. 98</div>
+          <div class="option-btn" onclick="selectRadio('m1', 'B', this)">B. 79</div>
+          <div class="option-btn" onclick="selectRadio('m1', 'C', this)">C. 78</div>
+          <div class="option-btn" onclick="selectRadio('m1', 'D', this)">D. 89</div>
+        </div>
+        <input type="hidden" id="m1">
+        <div class="feedback-msg hidden" id="fb-m1"></div>
+      </div>
+
+      <!-- Câu 2 Toán (Ảnh 1 - Câu 2) -->
+      <div class="question-card" id="card-m2">
+        <div class="q-title">Câu 2 (TN): Số 54 được đọc là:</div>
+        <div class="options-grid">
+          <div class="option-btn" onclick="selectRadio('m2', 'A', this)">A. Năm mươi tư</div>
+          <div class="option-btn" onclick="selectRadio('m2', 'B', this)">B. Lăm mươi tư</div>
+          <div class="option-btn" onclick="selectRadio('m2', 'C', this)">C. Năm mươi bốn</div>
+          <div class="option-btn" onclick="selectRadio('m2', 'D', this)">D. Năm bốn</div>
+        </div>
+        <input type="hidden" id="m2">
+        <div class="feedback-msg hidden" id="fb-m2"></div>
+      </div>
+
+      <!-- Câu 3 Toán (Ảnh 1 - Câu 3) -->
+      <div class="question-card" id="card-m3">
+        <div class="q-title">Câu 3 (TN): Tìm số thích hợp điền vào dấu [ ? ]: (Sơ đồ tách 75 thành ? và 5)</div>
+        <div style="text-align:center; margin-bottom:10px;">
+          <div class="tree-box"><b>75</b><br>↙ ↘<br><b>[ ? ]</b> &nbsp;&nbsp; <b>5</b></div>
+        </div>
+        <div class="options-grid">
+          <div class="option-btn" onclick="selectRadio('m3', 'A', this)">A. 7</div>
+          <div class="option-btn" onclick="selectRadio('m3', 'B', this)">B. 70</div>
+          <div class="option-btn" onclick="selectRadio('m3', 'C', this)">C. 50</div>
+          <div class="option-btn" onclick="selectRadio('m3', 'D', this)">D. 17</div>
+        </div>
+        <input type="hidden" id="m3">
+        <div class="feedback-msg hidden" id="fb-m3"></div>
+      </div>
+
+      <!-- Câu 4 Toán (Ảnh 1 - Câu 4) -->
+      <div class="question-card" id="card-m4">
+        <div class="q-title">Câu 4 (TN): Tìm số thích hợp điền vào [ ? ]: 25 < [ ? ] < 30</div>
+        <div class="options-grid">
+          <div class="option-btn" onclick="selectRadio('m4', 'A', this)">A. 24</div>
+          <div class="option-btn" onclick="selectRadio('m4', 'B', this)">B. 40</div>
+          <div class="option-btn" onclick="selectRadio('m4', 'C', this)">C. 35</div>
+          <div class="option-btn" onclick="selectRadio('m4', 'D', this)">D. 27</div>
+        </div>
+        <input type="hidden" id="m4">
+        <div class="feedback-msg hidden" id="fb-m4"></div>
+      </div>
+
+      <!-- Câu 5 Toán (Ảnh 1 - Câu 5) -->
+      <div class="question-card" id="card-m5">
+        <div class="q-title">Câu 5 (TN): Trong các số: 26, 65, 36, 59; số bé nhất là:</div>
+        <div class="options-grid">
+          <div class="option-btn" onclick="selectRadio('m5', 'A', this)">A. 26</div>
+          <div class="option-btn" onclick="selectRadio('m5', 'B', this)">B. 65</div>
+          <div class="option-btn" onclick="selectRadio('m5', 'C', this)">C. 36</div>
+          <div class="option-btn" onclick="selectRadio('m5', 'D', this)">D. 59</div>
+        </div>
+        <input type="hidden" id="m5">
+        <div class="feedback-msg hidden" id="fb-m5"></div>
+      </div>
+
+      <!-- Câu 6 Toán (Ảnh 1 - Câu 6) -->
+      <div class="question-card" id="card-m6">
+        <div class="q-title">Câu 6 (TN): Các số được sắp xếp theo thứ tự từ LỚN đến BÉ là:</div>
+        <div class="options-grid">
+          <div class="option-btn" onclick="selectRadio('m6', 'A', this)">A. 50, 53, 43, 59</div>
+          <div class="option-btn" onclick="selectRadio('m6', 'B', this)">B. 57, 56, 55, 51</div>
+          <div class="option-btn" onclick="selectRadio('m6', 'C', this)">C. 50, 51, 55, 57</div>
+          <div class="option-btn" onclick="selectRadio('m6', 'D', this)">D. 52, 54, 58, 50</div>
+        </div>
+        <input type="hidden" id="m6">
+        <div class="feedback-msg hidden" id="fb-m6"></div>
+      </div>
+
+      <!-- Câu 7 Toán (Ảnh 1 - Câu 7 & Câu 8) -->
+      <div class="question-card" id="card-m7">
+        <div class="q-title">Câu 7 (TN): Từ 10 đến 100 có tất cả bao nhiêu số tròn chục?</div>
+        <div class="options-grid">
+          <div class="option-btn" onclick="selectRadio('m7', 'A', this)">A. 9 số</div>
+          <div class="option-btn" onclick="selectRadio('m7', 'B', this)">B. 11 số</div>
+          <div class="option-btn" onclick="selectRadio('m7', 'C', this)">C. 10 số</div>
+          <div class="option-btn" onclick="selectRadio('m7', 'D', this)">D. 12 số</div>
+        </div>
+        <input type="hidden" id="m7">
+        <div class="feedback-msg hidden" id="fb-m7"></div>
+      </div>
+
+      <!-- Câu 8 Toán (Ảnh 2 - Bài 1 & Bài 2 Điền từ/số) -->
+      <div class="question-card" id="card-m8">
+        <div class="q-title">Câu 8 (Điền số/chữ): Điền vào chỗ trống theo cấu tạo số</div>
+        <p>• Số 82 gồm <input type="text" class="fill-input" id="m8-1"> chục và <input type="text" class="fill-input" id="m8-2"> đơn vị.</p>
+        <p>• Số gồm 8 chục và 9 đơn vị là số: <input type="text" class="fill-input" id="m8-3"></p>
+        <div class="feedback-msg hidden" id="fb-m8"></div>
+      </div>
+
+      <!-- Câu 9 Toán (Ảnh 3 - Bài 4 & Bài 5 Kéo thả sắp xếp số) -->
+      <div class="question-card" id="card-m9">
+        <div class="q-title">Câu 9 (Kéo thả): Sắp xếp dãy số [36, 35, 28, 80] theo thứ tự từ BÉ đến LỚN:</div>
+        <div class="drag-box">
+          <div class="drag-item" draggable="true" ondragstart="drag(event)" id="dm1">36</div>
+          <div class="drag-item" draggable="true" ondragstart="drag(event)" id="dm2">35</div>
+          <div class="drag-item" draggable="true" ondragstart="drag(event)" id="dm3">28</div>
+          <div class="drag-item" draggable="true" ondragstart="drag(event)" id="dm4">80</div>
+        </div>
+        <p>Thứ tự tăng dần: 
+          <span class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)" id="drop-m9-1"></span> &lt;
+          <span class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)" id="drop-m9-2"></span> &lt;
+          <span class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)" id="drop-m9-3"></span> &lt;
+          <span class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)" id="drop-m9-4"></span>
+        </p>
+        <div class="feedback-msg hidden" id="fb-m9"></div>
+      </div>
+
+      <!-- Câu 10 Toán (Ảnh 3 - Bài 7) -->
+      <div class="question-card" id="card-m10">
+        <div class="q-title">Câu 10 (Điền số): Tìm số theo yêu cầu:</div>
+        <p>• Số tròn chục lớn nhất có hai chữ số là: <input type="text" class="fill-input" id="m10-1"></p>
+        <p>• Số lớn nhất có hai chữ số khác nhau là: <input type="text" class="fill-input" id="m10-2"></p>
+        <div class="feedback-msg hidden" id="fb-m10"></div>
+      </div>
+
+
+      <!-- ==================== MÔN TIẾNG VIỆT ==================== -->
+      <h2 class="subject-title" style="background: linear-gradient(90deg, #FF8BA7, #FFC6C7);">
+        📖 MÔN TIẾNG VIỆT (Bài 3: Niềm vui của Bi và Bống - VBT Tiếng Việt 2)
+      </h2>
+
+      <!-- Câu 1 TV (TN) -->
+      <div class="question-card" id="card-v1">
+        <div class="q-title">Câu 1 (TN): Trong bài "Niềm vui của Bi và Bống", khi có mưa rào và nắng, cái gì xuất hiện trên bầu trời?</div>
+        <div class="options-grid">
+          <div class="option-btn" onclick="selectRadio('v1', 'A', this)">A. Cầu vồng</div>
+          <div class="option-btn" onclick="selectRadio('v1', 'B', this)">B. Mặt trời</div>
+          <div class="option-btn" onclick="selectRadio('v1', 'C', this)">C. Sấm sét</div>
+        </div>
+        <input type="hidden" id="v1">
+        <div class="feedback-msg hidden" id="fb-v1"></div>
+      </div>
+
+      <!-- Câu 2 TV (TN) -->
+      <div class="question-card" id="card-v2">
+        <div class="q-title">Câu 2 (TN): Ở chân cầu vồng có điều gì bí mật theo lời Bi nói?</div>
+        <div class="options-grid">
+          <div class="option-btn" onclick="selectRadio('v2', 'A', this)">A. Có một hũ vàng</div>
+          <div class="option-btn" onclick="selectRadio('v2', 'B', this)">B. Có hũ vàng của Bi và hũ búp bẽ của Bống</div>
+          <div class="option-btn" onclick="selectRadio('v2', 'C', this)">C. Có một ngôi nhà</div>
+        </div>
+        <input type="hidden" id="v2">
+        <div class="feedback-msg hidden" id="fb-v2"></div>
+      </div>
+
+      <!-- Câu 3 TV (TN) -->
+      <div class="question-card" id="card-v3">
+        <div class="q-title">Câu 3 (TN): Nếu có hũ vàng, Bi sẽ mua gì?</div>
+        <div class="options-grid">
+          <div class="option-btn" onclick="selectRadio('v3', 'A', this)">A. Mua quần áo đẹp</div>
+          <div class="option-btn" onclick="selectRadio('v3', 'B', this)">B. Mua một quả bóng đá</div>
+          <div class="option-btn" onclick="selectRadio('v3', 'C', this)">C. Mua nhiều xe ô tô chơi</div>
+        </div>
+        <input type="hidden" id="v3">
+        <div class="feedback-msg hidden" id="fb-v3"></div>
+      </div>
+
+      <!-- Câu 4 TV (Điền từ) -->
+      <div class="question-card" id="card-v4">
+        <div class="q-title">Câu 4 (Điền từ): Nếu Bống có hũ búp bê, Bống sẽ mua cho Bi món đồ gì?</div>
+        <div>Trả lời: Bống sẽ mua cho Bi một cái <input type="text" class="fill-input" id="v4" style="width: 160px;"></div>
+        <div class="feedback-msg hidden" id="fb-v4"></div>
+      </div>
+
+      <!-- Câu 5 TV (Nối) -->
+      <div class="question-card" id="card-v5">
+        <div class="q-title">Câu 5 (Nối): Nối từ ngữ chỉ người/vật với từ ngữ chỉ hoạt động tương ứng</div>
+        <div class="match-container">
+          <div class="match-col" id="v5-left">
+            <div class="match-item" data-id="1" onclick="handleMatchLeft('v5', this)">Cầu vồng</div>
+            <div class="match-item" data-id="2" onclick="handleMatchLeft('v5', this)">Hai anh em</div>
+          </div>
+          <div class="match-col" id="v5-right">
+            <div class="match-item" data-id="2" onclick="handleMatchRight('v5', this)">trò chuyện vui vẻ</div>
+            <div class="match-item" data-id="1" onclick="handleMatchRight('v5', this)">rực rỡ trên bầu trời</div>
+          </div>
+        </div>
+        <div class="feedback-msg hidden" id="fb-v5"></div>
+      </div>
+
+      <!-- Câu 6 TV (Kéo thả) -->
+      <div class="question-card" id="card-v6">
+        <div class="q-title">Câu 6 (Kéo thả): Chọn từ phù hợp điền vào chỗ trống trong câu</div>
+        <div class="drag-box">
+          <div class="drag-item" draggable="true" ondragstart="drag(event)" id="dv1">yêu thương</div>
+          <div class="drag-item" draggable="true" ondragstart="drag(event)" id="dv2">nhường nhịn</div>
+        </div>
+        <p>Bi và Bống rất <span class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)" id="drop-v6-1"></span> nhau.</p>
+        <p>Anh em trong nhà phải biết <span class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)" id="drop-v6-2"></span> lẫn nhau.</p>
+        <div class="feedback-msg hidden" id="fb-v6"></div>
+      </div>
+
+      <!-- Câu 7 TV (TN) -->
+      <div class="question-card" id="card-v7">
+        <div class="q-title">Câu 7 (TN): Từ nào dưới đây là từ chỉ tình cảm anh chị em?</div>
+        <div class="options-grid">
+          <div class="option-btn" onclick="selectRadio('v7', 'A', this)">A. Dũng cảm</div>
+          <div class="option-btn" onclick="selectRadio('v7', 'B', this)">B. Bùm búp</div>
+          <div class="option-btn" onclick="selectRadio('v7', 'C', this)">C. Hòa thuận</div>
+        </div>
+        <input type="hidden" id="v7">
+        <div class="feedback-msg hidden" id="fb-v7"></div>
+      </div>
+
+      <!-- Câu 8 TV (Điền từ) -->
+      <div class="question-card" id="card-v8">
+        <div class="q-title">Câu 8 (Điền từ): Tìm từ viết đúng chính tả (c/k): "con ...iến"</div>
+        <div>Điền c hoặc k: con <input type="text" class="fill-input" id="v8" maxlength="1" style="width: 60px;">iến</div>
+        <div class="feedback-msg hidden" id="fb-v8"></div>
+      </div>
+
+      <!-- Câu 9 TV (TN) -->
+      <div class="question-card" id="card-v9">
+        <div class="q-title">Câu 9 (TN): Lời nói của Bi và Bống thể hiện điều gì?</div>
+        <div class="options-grid">
+          <div class="option-btn" onclick="selectRadio('v9', 'A', this)">A. Tình cảm yêu thương và quan tâm lẫn nhau</div>
+          <div class="option-btn" onclick="selectRadio('v9', 'B', this)">B. Sự tranh giành đồ chơi</div>
+          <div class="option-btn" onclick="selectRadio('v9', 'C', this)">C. Ước mơ muốn trở nên giàu có</div>
+        </div>
+        <input type="hidden" id="v9">
+        <div class="feedback-msg hidden" id="fb-v9"></div>
+      </div>
+
+      <!-- Câu 10 TV (Điền từ) -->
+      <div class="question-card" id="card-v10">
+        <div class="q-title">Câu 10 (Điền từ): Điền câu trả lời ngắn: Câu "Bi và Bống là hai anh em" trả lời cho câu hỏi Ai là gì? Đúng hay Sai?</div>
+        <div>Trả lời (Đúng/Sai): <input type="text" class="fill-input" id="v10" style="width: 100px;"></div>
+        <div class="feedback-msg hidden" id="fb-v10"></div>
+      </div>
+
+
+      <!-- ==================== MÔN TIẾNG ANH ==================== -->
+      <h2 class="subject-title" style="background: linear-gradient(90deg, #2A9D8F, #E9C46A);">
+        🔤 MÔN TIẾNG ANH (Unit 1: At my birthday party - Tiếng Anh 2)
+      </h2>
+
+      <!-- Câu 1 Anh (TN) -->
+      <div class="question-card" id="card-e1">
+        <div class="q-title">Question 1 (MCQ): Choose the correct word for "Bánh sinh nhật":</div>
+        <div class="options-grid">
+          <div class="option-btn" onclick="selectRadio('e1', 'A', this)">A. Cake</div>
+          <div class="option-btn" onclick="selectRadio('e1', 'B', this)">B. Cat</div>
+          <div class="option-btn" onclick="selectRadio('e1', 'C', this)">C. Car</div>
+        </div>
+        <input type="hidden" id="e1">
+        <div class="feedback-msg hidden" id="fb-e1"></div>
+      </div>
+
+      <!-- Câu 2 Anh (TN) -->
+      <div class="question-card" id="card-e2">
+        <div class="q-title">Question 2 (MCQ): "Popcorn" means:</div>
+        <div class="options-grid">
+          <div class="option-btn" onclick="selectRadio('e2', 'A', this)">A. Bánh ngô</div>
+          <div class="option-btn" onclick="selectRadio('e2', 'B', this)">B. Bỏng ngô</div>
+          <div class="option-btn" onclick="selectRadio('e2', 'C', this)">C. Kẹo đường</div>
+        </div>
+        <input type="hidden" id="e2">
+        <div class="feedback-msg hidden" id="fb-e2"></div>
+      </div>
+
+      <!-- Câu 3 Anh (Điền từ) -->
+      <div class="question-card" id="card-e3">
+        <div class="q-title">Question 3 (Fill): Fill in the missing letter: P _ A C H (Quả đào)</div>
+        <div>Missing letter: <input type="text" class="fill-input" id="e3" maxlength="1" style="width: 60px;"></div>
+        <div class="feedback-msg hidden" id="fb-e3"></div>
+      </div>
+
+      <!-- Câu 4 Anh (Điền từ) -->
+      <div class="question-card" id="card-e4">
+        <div class="q-title">Question 4 (Fill): Complete the sentence: "I like _____." (Tôi thích bỏng ngô)</div>
+        <div>Answer: <input type="text" class="fill-input" id="e4" style="width: 150px;"></div>
+        <div class="feedback-msg hidden" id="fb-e4"></div>
+      </div>
+
+      <!-- Câu 5 Anh (Nối) -->
+      <div class="question-card" id="card-e5">
+        <div class="q-title">Question 5 (Matching): Match words with Vietnamese meaning</div>
+        <div class="match-container">
+          <div class="match-col" id="e5-left">
+            <div class="match-item" data-id="1" onclick="handleMatchLeft('e5', this)">Cake</div>
+            <div class="match-item" data-id="2" onclick="handleMatchLeft('e5', this)">Pasta</div>
+          </div>
+          <div class="match-col" id="e5-right">
+            <div class="match-item" data-id="2" onclick="handleMatchRight('e5', this)">Mỳ Ý</div>
+            <div class="match-item" data-id="1" onclick="handleMatchRight('e5', this)">Bánh ngọt</div>
+          </div>
+        </div>
+        <div class="feedback-msg hidden" id="fb-e5"></div>
+      </div>
+
+      <!-- Câu 6 Anh (Kéo thả) -->
+      <div class="question-card" id="card-e6">
+        <div class="q-title">Question 6 (Drag and drop): Complete the sentences</div>
+        <div class="drag-box">
+          <div class="drag-item" draggable="true" ondragstart="drag(event)" id="de1">like</div>
+          <div class="drag-item" draggable="true" ondragstart="drag(event)" id="de2">have</div>
+        </div>
+        <p>I <span class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)" id="drop-e6-1"></span> apples. (Tôi thích táo)</p>
+        <p>I <span class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)" id="drop-e6-2"></span> a cake. (Tôi có một cái bánh)</p>
+        <div class="feedback-msg hidden" id="fb-e6"></div>
+      </div>
+
+      <!-- Câu 7 Anh (TN) -->
+      <div class="question-card" id="card-e7">
+        <div class="q-title">Question 7 (MCQ): Which letter starts the word "Pasta"?</div>
+        <div class="options-grid">
+          <div class="option-btn" onclick="selectRadio('e7', 'A', this)">A. Letter P</div>
+          <div class="option-btn" onclick="selectRadio('e7', 'B', this)">B. Letter B</div>
+          <div class="option-btn" onclick="selectRadio('e7', 'C', this)">C. Letter C</div>
+        </div>
+        <input type="hidden" id="e7">
+        <div class="feedback-msg hidden" id="fb-e7"></div>
+      </div>
+
+      <!-- Câu 8 Anh (Điền từ) -->
+      <div class="question-card" id="card-e8">
+        <div class="q-title">Question 8 (Fill): Unscramble letters to make word: "C-A-K-E"</div>
+        <div>Correct word: <input type="text" class="fill-input" id="e8" style="width: 120px;"></div>
+        <div class="feedback-msg hidden" id="fb-e8"></div>
+      </div>
+
+      <!-- Câu 9 Anh (TN) -->
+      <div class="question-card" id="card-e9">
+        <div class="q-title">Question 9 (MCQ): "Happy Birthday!" means:</div>
+        <div class="options-grid">
+          <div class="option-btn" onclick="selectRadio('e9', 'A', this)">A. Chúc mừng năm mới!</div>
+          <div class="option-btn" onclick="selectRadio('e9', 'B', this)">B. Chúc mừng sinh nhật!</div>
+          <div class="option-btn" onclick="selectRadio('e9', 'C', this)">C. Cảm ơn bạn!</div>
+        </div>
+        <input type="hidden" id="e9">
+        <div class="feedback-msg hidden" id="fb-e9"></div>
+      </div>
+
+      <!-- Câu 10 Anh (Kéo thả) -->
+      <div class="question-card" id="card-e10">
+        <div class="q-title">Question 10 (Drag and drop): Complete conversation</div>
+        <div class="drag-box">
+          <div class="drag-item" draggable="true" ondragstart="drag(event)" id="de3">popcorn</div>
+          <div class="drag-item" draggable="true" ondragstart="drag(event)" id="de4">peach</div>
+        </div>
+        <p>- What do you like? - I like <span class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)" id="drop-e10-1"></span>. (bỏng ngô)</p>
+        <p>- Here is a <span class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)" id="drop-e10-2"></span> for you. (quả đào)</p>
+        <div class="feedback-msg hidden" id="fb-e10"></div>
+      </div>
+
+      <div style="text-align: center; margin-top: 35px;">
+        <button type="button" class="btn-submit" id="btn-submit-quiz" onclick="submitQuiz()">NỘP BÀI VÀ XEM KẾT QUẢ 🌟</button>
+      </div>
+
+    </form>
+  </div>
+
+</div>
+
+<script>
+  let timerInterval = null;
+  let secondsElapsed = 0;
+  let studentName = "";
+  let studentClass = "";
+  let matchPairs = {}; 
+  let selectedLeft = {};
+
+  function startGame() {
+    studentName = document.getElementById('student-name').value.trim();
+    studentClass = document.getElementById('student-class').value.trim();
+
+    if (!studentName || !studentClass) {
+      alert("Học sinh vui lòng điền đầy đủ Họ tên và Lớp để bắt đầu làm bài nhé!");
+      return;
+    }
+
+    document.getElementById('display-name').innerText = studentName;
+    document.getElementById('display-class').innerText = studentClass;
+
+    document.getElementById('screen-login').classList.add('hidden');
+    document.getElementById('screen-quiz').classList.remove('hidden');
+
+    // Chạy đồng hồ
+    timerInterval = setInterval(() => {
+      secondsElapsed++;
+      let mins = Math.floor(secondsElapsed / 60);
+      let secs = secondsElapsed % 60;
+      document.getElementById('time-clock').innerText = 
+        (mins < 10 ? "0" + mins : mins) + ":" + (secs < 10 ? "0" + secs : secs);
+    }, 1000);
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Chọn Trắc Nghiệm
+  function selectRadio(inputId, val, element) {
+    document.getElementById(inputId).value = val;
+    let parent = element.parentElement;
+    let btns = parent.querySelectorAll('.option-btn');
+    btns.forEach(b => b.classList.remove('selected'));
+    element.classList.add('selected');
+  }
+
+  // Nối Từ (Matching)
+  function handleMatchLeft(qId, el) {
+    if (el.classList.contains('matched')) return;
+    let parent = document.getElementById(qId + '-left');
+    parent.querySelectorAll('.match-item').forEach(i => i.classList.remove('selected-left'));
+    el.classList.add('selected-left');
+    selectedLeft[qId] = el;
+  }
+
+  function handleMatchRight(qId, el) {
+    if (!selectedLeft[qId] || el.classList.contains('matched')) return;
+    let leftEl = selectedLeft[qId];
+    
+    if (!matchPairs[qId]) matchPairs[qId] = {};
+    matchPairs[qId][leftEl.innerText.trim()] = el.innerText.trim();
+
+    leftEl.classList.remove('selected-left');
+    leftEl.classList.add('matched');
+    el.classList.add('matched');
+
+    selectedLeft[qId] = null;
+  }
+
+  // Kéo Thả (Drag & Drop)
+  function allowDrop(ev) { ev.preventDefault(); }
+  function drag(ev) { ev.dataTransfer.setData("text", ev.target.id); }
+  function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    var draggedElement = document.getElementById(data);
+    if (ev.target.classList.contains('drop-zone') && ev.target.children.length === 0) {
+      ev.target.appendChild(draggedElement);
+    }
+  }
+
+  // Chấm điểm và Hiển thị Đáp Án Trực Tiếp
+  function submitQuiz() {
+    if (!confirm("Em có chắc chắn muốn nộp bài để xem điểm không?")) return;
+
+    clearInterval(timerInterval);
+
+    let mathCorrect = 0;
+    let tvCorrect = 0;
+    let engCorrect = 0;
+
+    // Helper chấm điểm
+    function checkAnswer(cardId, fbId, isCorrect, correctAnsText) {
+      let card = document.getElementById(cardId);
+      let fb = document.getElementById(fbId);
+      fb.classList.remove('hidden');
+
+      if (isCorrect) {
+        card.classList.add('correct-card');
+        fb.classList.add('feedback-correct');
+        fb.innerHTML = "✅ Chính xác!";
+        return 1;
+      } else {
+        card.classList.add('wrong-card');
+        fb.classList.add('feedback-wrong');
+        fb.innerHTML = "❌ Chưa đúng! Đáp án đúng: " + correctAnsText;
+        return 0;
+      }
+    }
+
+    // --- CHẤM TOÁN ---
+    mathCorrect += checkAnswer('card-m1', 'fb-m1', document.getElementById('m1').value === 'D', "D. 89");
+    mathCorrect += checkAnswer('card-m2', 'fb-m2', document.getElementById('m2').value === 'A' || document.getElementById('m2').value === 'C', "A hoặc C (Năm mươi tư / Năm mươi bốn)");
+    mathCorrect += checkAnswer('card-m3', 'fb-m3', document.getElementById('m3').value === 'B', "B. 70");
+    mathCorrect += checkAnswer('card-m4', 'fb-m4', document.getElementById('m4').value === 'D', "D. 27");
+    mathCorrect += checkAnswer('card-m5', 'fb-m5', document.getElementById('m5').value === 'A', "A. 26");
+    mathCorrect += checkAnswer('card-m6', 'fb-m6', document.getElementById('m6').value === 'B', "B. 57, 56, 55, 51");
+    mathCorrect += checkAnswer('card-m7', 'fb-m7', document.getElementById('m7').value === 'C', "C. 10 số (10,20,30,40,50,60,70,80,90,100)");
+
+    let m8_1 = document.getElementById('m8-1').value.trim();
+    let m8_2 = document.getElementById('m8-2').value.trim();
+    let m8_3 = document.getElementById('m8-3').value.trim();
+    mathCorrect += checkAnswer('card-m8', 'fb-m8', (m8_1 === '8' && m8_2 === '2' && m8_3 === '89'), "8 chục, 2 đơn vị và Số 89");
+
+    let m9_1 = document.getElementById('drop-m9-1').innerText.trim();
+    let m9_2 = document.getElementById('drop-m9-2').innerText.trim();
+    let m9_3 = document.getElementById('drop-m9-3').innerText.trim();
+    let m9_4 = document.getElementById('drop-m9-4').innerText.trim();
+    mathCorrect += checkAnswer('card-m9', 'fb-m9', (m9_1 === '28' && m9_2 === '35' && m9_3 === '36' && m9_4 === '80'), "28 < 35 < 36 < 80");
+
+    let m10_1 = document.getElementById('m10-1').value.trim();
+    let m10_2 = document.getElementById('m10-2').value.trim();
+    mathCorrect += checkAnswer('card-m10', 'fb-m10', (m10_1 === '90' && m10_2 === '98'), "90 và 98");
+
+    // --- CHẤM TIẾNG VIỆT ---
+    tvCorrect += checkAnswer('card-v1', 'fb-v1', document.getElementById('v1').value === 'A', "A. Cầu vồng");
+    tvCorrect += checkAnswer('card-v2', 'fb-v2', document.getElementById('v2').value === 'B', "B. Có hũ vàng của Bi và hũ búp bê của Bống");
+    tvCorrect += checkAnswer('card-v3', 'fb-v3', document.getElementById('v3').value === 'B', "B. Mua một quả bóng đá");
+
+    let v4_ans = document.getElementById('v4').value.trim().toLowerCase();
+    tvCorrect += checkAnswer('card-v4', 'fb-v4', (v4_ans.includes('bóng') || v4_ans.includes('quả bóng')), "quả bóng đá");
+
+    let v5_val = matchPairs['v5'] || {};
+    let v5_isCorrect = (v5_val['Cầu vồng'] === 'rực rỡ trên bầu trời' && v5_val['Hai anh em'] === 'trò chuyện vui vẻ');
+    tvCorrect += checkAnswer('card-v5', 'fb-v5', v5_isCorrect, "Cầu vồng -> rực rỡ...; Hai anh em -> trò chuyện...");
+
+    let v6_1 = document.getElementById('drop-v6-1').innerText.trim();
+    let v6_2 = document.getElementById('drop-v6-2').innerText.trim();
+    tvCorrect += checkAnswer('card-v6', 'fb-v6', (v6_1 === 'yêu thương' && v6_2 === 'nhường nhịn'), "Vị trí 1: yêu thương; Vị trí 2: nhường nhịn");
+
+    tvCorrect += checkAnswer('card-v7', 'fb-v7', document.getElementById('v7').value === 'C', "C. Hòa thuận");
+
+    let v8_ans = document.getElementById('v8').value.trim().toLowerCase();
+    tvCorrect += checkAnswer('card-v8', 'fb-v8', v8_ans === 'k', "k");
+
+    tvCorrect += checkAnswer('card-v9', 'fb-v9', document.getElementById('v9').value === 'A', "A. Tình cảm yêu thương và quan tâm lẫn nhau");
+
+    let v10_ans = document.getElementById('v10').value.trim().toLowerCase();
+    tvCorrect += checkAnswer('card-v10', 'fb-v10', (v10_ans === 'đúng' || v10_ans === 'dung'), "Đúng");
+
+    // --- CHẤM TIẾNG ANH ---
+    engCorrect += checkAnswer('card-e1', 'fb-e1', document.getElementById('e1').value === 'A', "A. Cake");
+    engCorrect += checkAnswer('card-e2', 'fb-e2', document.getElementById('e2').value === 'B', "B. Bỏng ngô");
+
+    let e3_ans = document.getElementById('e3').value.trim().toUpperCase();
+    engCorrect += checkAnswer('card-e3', 'fb-e3', e3_ans === 'E', "E (PEACH)");
+
+    let e4_ans = document.getElementById('e4').value.trim().toLowerCase();
+    engCorrect += checkAnswer('card-e4', 'fb-e4', (e4_ans === 'popcorn'), "popcorn");
+
+    let e5_val = matchPairs['e5'] || {};
+    let e5_isCorrect = (e5_val['Cake'] === 'Bánh ngọt' && e5_val['Pasta'] === 'Mỳ Ý');
+    engCorrect += checkAnswer('card-e5', 'fb-e5', e5_isCorrect, "Cake -> Bánh ngọt; Pasta -> Mỳ Ý");
+
+    let e6_1 = document.getElementById('drop-e6-1').innerText.trim();
+    let e6_2 = document.getElementById('drop-e6-2').innerText.trim();
+    engCorrect += checkAnswer('card-e6', 'fb-e6', (e6_1 === 'like' && e6_2 === 'have'), "1: like; 2: have");
+
+    engCorrect += checkAnswer('card-e7', 'fb-e7', document.getElementById('e7').value === 'A', "A. Letter P");
+
+    let e8_ans = document.getElementById('e8').value.trim().toUpperCase();
+    engCorrect += checkAnswer('card-e8', 'fb-e8', e8_ans === 'CAKE', "CAKE");
+
+    engCorrect += checkAnswer('card-e9', 'fb-e9', document.getElementById('e9').value === 'B', "B. Chúc mừng sinh nhật!");
+
+    let e10_1 = document.getElementById('drop-e10-1').innerText.trim();
+    let e10_2 = document.getElementById('drop-e10-2').innerText.trim();
+    engCorrect += checkAnswer('card-e10', 'fb-e10', (e10_1 === 'popcorn' && e10_2 === 'peach'), "1: popcorn; 2: peach");
+
+    // Hiển thị khung bảng điểm
+    document.getElementById('scoreboard-box').classList.remove('hidden');
+    document.getElementById('res-time').innerText = document.getElementById('time-clock').innerText;
+    document.getElementById('score-math').innerText = mathCorrect + " / 10";
+    document.getElementById('score-tv').innerText = tvCorrect + " / 10";
+    document.getElementById('score-eng').innerText = engCorrect + " / 10";
+
+    // Ẩn nút Nộp bài
+    document.getElementById('btn-submit-quiz').style.display = 'none';
+
+    // Cuộn lên đầu xem điểm
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
