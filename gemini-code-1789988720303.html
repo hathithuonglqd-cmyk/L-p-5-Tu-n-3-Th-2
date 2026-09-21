@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phiếu Bài Tập Lớp 5 - Toán, Tiếng Việt & Tiếng Anh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #0284C7;
+      --secondary: #38BDF8;
+      --accent-yellow: #F59E0B;
+      --card-bg: #FFFFFF;
+      --text-color: #1E293B;
+      --correct-bg: #D1FAE5;
+      --correct-border: #10B981;
+      --wrong-bg: #FEE2E2;
+      --wrong-border: #EF4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Nunito', 'Fredoka', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #E0F2FE 0%, #FEF3C7 100%);
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--text-color);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      background-color: var(--card-bg);
+      border-radius: 25px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+      padding: 30px;
+      border: 5px solid #FFFFFF;
+    }
+
+    h1 {
+      font-family: 'Fredoka', cursive;
+      text-align: center;
+      color: var(--primary);
+      font-size: 26px;
+      margin-top: 0;
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-weight: 700;
+      color: #64748B;
+      margin-bottom: 20px;
+    }
+
+    .section-header {
+      background-color: #0284C7;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 800;
+      margin: 25px 0 15px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .instruction-box {
+      background-color: #FEF3C7;
+      border: 2px dashed #F59E0B;
+      border-radius: 15px;
+      padding: 12px 20px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 800;
+      color: #92400E;
+      font-size: 15px;
+    }
+
+    /* Màn hình Đăng Nhập */
+    .login-box {
+      text-align: center;
+      padding: 20px 10px;
+    }
+
+    .avatar-welcome {
+      font-size: 70px;
+      margin-bottom: 10px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+      max-width: 380px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    label {
+      font-weight: 800;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 18px;
+      border: 3px solid #E2E8F0;
+      border-radius: 15px;
+      font-size: 16px;
+      font-weight: 700;
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 10px rgba(2, 132, 199, 0.3);
+    }
+
+    .btn-start, .btn-submit {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 14px 40px;
+      font-size: 18px;
+      font-weight: 800;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 5px 0px #0369A1;
+      transition: all 0.2s;
+    }
+
+    .btn-start:hover, .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 0px #0369A1;
+    }
+
+    /* Header Bar */
+    .header-bar {
+      position: sticky;
+      top: 10px;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #E0F2FE;
+      padding: 12px 20px;
+      border-radius: 18px;
+      margin-bottom: 20px;
+      font-weight: 800;
+      border: 2px solid #BAE6FD;
+    }
+
+    .timer {
+      background: var(--primary);
+      color: white;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 18px;
+    }
+
+    /* Bảng điểm */
+    .scoreboard {
+      background-color: #E0F2FE;
+      border: 3px solid #7DD3FC;
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .score-num {
+      font-size: 40px;
+      font-weight: 900;
+      color: var(--primary);
+      margin: 10px 0;
+    }
+
+    /* Question Card */
+    .question-card {
+      background-color: #F8FAFC;
+      border: 2px solid #E2E8F0;
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .q-title {
+      font-weight: 800;
+      color: var(--primary);
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .ans-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+      font-weight: 700;
+    }
+
+    .ans-input {
+      padding: 8px 14px;
+      border: 2px solid #94A3B8;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 800;
+      text-align: center;
+      outline: none;
+      color: #0369A1;
+    }
+
+    .ans-input:focus {
+      border-color: var(--primary);
+    }
+
+    /* Feedback */
+    .feedback-msg {
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .correct-card {
+      background-color: var(--correct-bg) !important;
+      border-color: var(--correct-border) !important;
+    }
+
+    .wrong-card {
+      background-color: var(--wrong-bg) !important;
+      border-color: var(--wrong-border) !important;
+    }
+
+    .feedback-correct {
+      color: #065F46;
+      background-color: #D1FAE5;
+    }
+
+    .feedback-wrong {
+      color: #991B1B;
+      background-color: #FEE2E2;
+    }
+
+    .fraction {
+      display: inline-flex;
+      flex-direction: column;
+      vertical-align: middle;
+      text-align: center;
+      padding: 0 4px;
+      font-weight: bold;
+    }
+    .fraction .top {
+      border-bottom: 2px solid #000;
+      padding-bottom: 2px;
+    }
+    .fraction .bottom {
+      padding-top: 2px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  
+  <!-- MÀN HÌNH ĐĂNG NHẬP -->
+  <div id="screen-login" class="login-box">
+    <div class="avatar-welcome">📚</div>
+    <h1>PHIẾU BÀI TẬP LỚP 5</h1>
+    <div class="subtitle">TOÁN (Phân Số) - TIẾNG VIỆT (Đại Từ Nghi Vấn) - TIẾNG ANH (Unit 1)</div>
+    
+    <div class="form-group">
+      <label for="student-name">👤 Họ và tên học sinh:</label>
+      <input type="text" id="student-name" placeholder="Nhập họ và tên..." autocomplete="off">
+    </div>
+    
+    <div class="form-group">
+      <label for="student-class">🏫 Lớp:</label>
+      <input type="text" id="student-class" placeholder="Nhập tên lớp (VD: 5A)..." autocomplete="off">
+    </div>
+
+    <button class="btn-start" onclick="startGame()">BẮT ĐẦU LÀM BÀI 🚀</button>
+  </div>
+
+  <!-- MÀN HÌNH BÀI TẬP -->
+  <div id="screen-quiz" class="hidden">
+    <div class="header-bar">
+      <div>👤 <span id="display-name"></span> - Lớp: <span id="display-class"></span></div>
+      <div class="timer">⏱️ <span id="time-clock">00:00</span></div>
+    </div>
+
+    <div class="instruction-box">
+      📌 HƯỚNG DẪN: Học sinh trình bày chi tiết các bài làm ra vở tăng cường, sau đó điền đáp án cuối cùng vào ô tương ứng dưới đây!
+    </div>
+
+    <!-- MÀN HÌNH BẢNG ĐIỂM -->
+    <div id="scoreboard-box" class="scoreboard hidden">
+      <h2>🎉 KẾT QUẢ BÀI LÀM</h2>
+      <p style="font-weight: 800; color: #475569;">Thời gian hoàn thành: <span id="res-time" style="color: var(--primary);"></span></p>
+      <div class="score-num" id="score-total">0 / 10</div>
+      <p style="color: #64748B; font-weight: 700; margin-top: 5px;">
+        Thang điểm 10 quy đổi từ tổng số câu hỏi. Đã kiểm tra và chấm chữa trực tiếp bên dưới!
+      </p>
+    </div>
+
+    <form id="quiz-form">
+      
+      <!-- PHẦN 1: TOÁN -->
+      <div class="section-header">📐 PHẦN 1: TOÁN HỌC (10 CÂU)</div>
+
+      <p style="font-weight: 800;">Bài 1: Điền số thích hợp vào chỗ trống để rút gọn phân số[cite: 7]:</p>
+
+      <!-- Toán Câu 1 -->
+      <div class="question-card" id="card-m1">
+        <div class="q-title">Bài 1a) <span class="fraction"><span class="top">400</span><span class="bottom">500</span></span> = <span class="fraction"><span class="top">400 : ...</span><span class="bottom">500 : ...</span></span> = <span class="fraction"><span class="top">...</span><span class="bottom">100</span></span>[cite: 7]</div>
+        <div class="ans-row">
+          <span>Số chia = </span> <input type="text" class="ans-input" id="m1-div" style="width: 80px;">, 
+          <span>Tử số mới = </span> <input type="text" class="ans-input" id="m1-num" style="width: 80px;">
+        </div>
+        <div class="feedback-msg hidden" id="fb-m1"></div>
+      </div>
+
+      <!-- Toán Câu 2 -->
+      <div class="question-card" id="card-m2">
+        <div class="q-title">Bài 1b) <span class="fraction"><span class="top">78</span><span class="bottom">2000</span></span> = <span class="fraction"><span class="top">78 : ...</span><span class="bottom">2000 : ...</span></span> = <span class="fraction"><span class="top">...</span><span class="bottom">1000</span></span>[cite: 7]</div>
+        <div class="ans-row">
+          <span>Số chia = </span> <input type="text" class="ans-input" id="m2-div" style="width: 80px;">, 
+          <span>Tử số mới = </span> <input type="text" class="ans-input" id="m2-num" style="width: 80px;">
+        </div>
+        <div class="feedback-msg hidden" id="fb-m2"></div>
+      </div>
+
+      <!-- Toán Câu 3 -->
+      <div class="question-card" id="card-m3">
+        <div class="q-title">Bài 1c) <span class="fraction"><span class="top">20</span><span class="bottom">200</span></span> = <span class="fraction"><span class="top">20 : ...</span><span class="bottom">200 : ...</span></span> = <span class="fraction"><span class="top">...</span><span class="bottom">100</span></span>[cite: 7]</div>
+        <div class="ans-row">
+          <span>Số chia = </span> <input type="text" class="ans-input" id="m3-div" style="width: 80px;">, 
+          <span>Tử số mới = </span> <input type="text" class="ans-input" id="m3-num" style="width: 80px;">
+        </div>
+        <div class="feedback-msg hidden" id="fb-m3"></div>
+      </div>
+
+      <!-- Toán Câu 4 -->
+      <div class="question-card" id="card-m4">
+        <div class="q-title">Bài 1d) <span class="fraction"><span class="top">25</span><span class="bottom">5000</span></span> = <span class="fraction"><span class="top">25 : ...</span><span class="bottom">5000 : ...</span></span> = <span class="fraction"><span class="top">...</span><span class="bottom">1000</span></span>[cite: 7]</div>
+        <div class="ans-row">
+          <span>Số chia = </span> <input type="text" class="ans-input" id="m4-div" style="width: 80px;">, 
+          <span>Tử số mới = </span> <input type="text" class="ans-input" id="m4-num" style="width: 80px;">
+        </div>
+        <div class="feedback-msg hidden" id="fb-m4"></div>
+      </div>
+
+      <p style="font-weight: 800; margin-top: 20px;">Bài 2: Cho các phân số sau[cite: 7]: <span class="fraction"><span class="top">4</span><span class="bottom">16</span></span>, <span class="fraction"><span class="top">2</span><span class="bottom">5</span></span>, <span class="fraction"><span class="top">15</span><span class="bottom">24</span></span>, <span class="fraction"><span class="top">7</span><span class="bottom">12</span></span>, <span class="fraction"><span class="top">16</span><span class="bottom">18</span></span>, <span class="fraction"><span class="top">49</span><span class="bottom">50</span></span>[cite: 7]</p>
+
+      <!-- Toán Câu 5 -->
+      <div class="question-card" id="card-m5">
+        <div class="q-title">Bài 2a) Liệt kê các phân số tối giản (ngăn cách bằng dấu phẩy)[cite: 7]:</div>
+        <div class="ans-row">
+          <span>➜ Các phân số tối giản:</span>
+          <input type="text" class="ans-input" id="m5-ans" style="width: 250px;" placeholder="Ví dụ: 2/5, 7/12, ...">
+        </div>
+        <div class="feedback-msg hidden" id="fb-m5"></div>
+      </div>
+
+      <!-- Toán Câu 6 -->
+      <div class="question-card" id="card-m6">
+        <div class="q-title">Bài 2b) Rút gọn phân số chưa tối giản: <span class="fraction"><span class="top">4</span><span class="bottom">16</span></span>[cite: 7]</div>
+        <div class="ans-row">
+          <span>➜ Rút gọn thành (dạng a/b):</span>
+          <input type="text" class="ans-input" id="m6-ans" style="width: 120px;">
+        </div>
+        <div class="feedback-msg hidden" id="fb-m6"></div>
+      </div>
+
+      <!-- Toán Câu 7 -->
+      <div class="question-card" id="card-m7">
+        <div class="q-title">Bài 2b) Rút gọn phân số chưa tối giản: <span class="fraction"><span class="top">15</span><span class="bottom">24</span></span>[cite: 7]</div>
+        <div class="ans-row">
+          <span>➜ Rút gọn thành (dạng a/b):</span>
+          <input type="text" class="ans-input" id="m7-ans" style="width: 120px;">
+        </div>
+        <div class="feedback-msg hidden" id="fb-m7"></div>
+      </div>
+
+      <!-- Toán Câu 8 -->
+      <div class="question-card" id="card-m8">
+        <div class="q-title">Bài 2b) Rút gọn phân số chưa tối giản: <span class="fraction"><span class="top">16</span><span class="bottom">18</span></span>[cite: 7]</div>
+        <div class="ans-row">
+          <span>➜ Rút gọn thành (dạng a/b):</span>
+          <input type="text" class="ans-input" id="m8-ans" style="width: 120px;">
+        </div>
+        <div class="feedback-msg hidden" id="fb-m8"></div>
+      </div>
+
+      <!-- Toán Câu 9 (Bổ sung) -->
+      <div class="question-card" id="card-m9">
+        <div class="q-title">Bài 3a) Thực hiện phép cộng phân số ra vở: <span class="fraction"><span class="top">1</span><span class="bottom">3</span></span> + <span class="fraction"><span class="top">2</span><span class="bottom">5</span></span></div>
+        <div class="ans-row">
+          <span>➜ Kết quả tối giản (dạng a/b):</span>
+          <input type="text" class="ans-input" id="m9-ans" style="width: 120px;">
+        </div>
+        <div class="feedback-msg hidden" id="fb-m9"></div>
+      </div>
+
+      <!-- Toán Câu 10 (Bổ sung) -->
+      <div class="question-card" id="card-m10">
+        <div class="q-title">Bài 3b) Thực hiện phép trừ phân số ra vở: <span class="fraction"><span class="top">5</span><span class="bottom">6</span></span> - <span class="fraction"><span class="top">1</span><span class="bottom">4</span></span></div>
+        <div class="ans-row">
+          <span>➜ Kết quả tối giản (dạng a/b):</span>
+          <input type="text" class="ans-input" id="m10-ans" style="width: 120px;">
+        </div>
+        <div class="feedback-msg hidden" id="fb-m10"></div>
+      </div>
+
+
+      <!-- PHẦN 2: TIẾNG VIỆT -->
+      <div class="section-header">📖 PHẦN 2: TIẾNG VIỆT (10 CÂU)</div>
+      <p style="font-weight: 800;">Bài tập: Xác định Đại từ nghi vấn và Mục đích sử dụng (hỏi về cái gì?)[cite: 7]:</p>
+
+      <!-- TV Câu 1 -->
+      <div class="question-card" id="card-v1">
+        <div class="q-title">Câu a) "Hôm đó, ai đã đến nhà mình?"[cite: 7]</div>
+        <div class="ans-row">
+          <span>• Đại từ nghi vấn:</span> <input type="text" class="ans-input" id="v1-dt" style="width: 120px;">
+          <span>• Mục đích (Hỏi về...):</span> <input type="text" class="ans-input" id="v1-md" style="width: 180px;" placeholder="người/vật/mấy/...">
+        </div>
+        <div class="feedback-msg hidden" id="fb-v1"></div>
+      </div>
+
+      <!-- TV Câu 2 -->
+      <div class="question-card" id="card-v2">
+        <div class="q-title">Câu b) "Sao em lại muốn giúp bạn?"[cite: 7]</div>
+        <div class="ans-row">
+          <span>• Đại từ nghi vấn:</span> <input type="text" class="ans-input" id="v2-dt" style="width: 120px;">
+          <span>• Mục đích (Hỏi về...):</span> <input type="text" class="ans-input" id="v2-md" style="width: 180px;">
+        </div>
+        <div class="feedback-msg hidden" id="fb-v2"></div>
+      </div>
+
+      <!-- TV Câu 3 -->
+      <div class="question-card" id="card-v3">
+        <div class="q-title">Câu c) "Cậu sẽ đi du lịch mấy ngày?"[cite: 7]</div>
+        <div class="ans-row">
+          <span>• Đại từ nghi vấn:</span> <input type="text" class="ans-input" id="v3-dt" style="width: 120px;">
+          <span>• Mục đích (Hỏi về...):</span> <input type="text" class="ans-input" id="v3-md" style="width: 180px;">
+        </div>
+        <div class="feedback-msg hidden" id="fb-v3"></div>
+      </div>
+
+      <!-- TV Câu 4 -->
+      <div class="question-card" id="card-v4">
+        <div class="q-title">Câu d) "Khi nào bạn đến thăm tôi?"[cite: 7]</div>
+        <div class="ans-row">
+          <span>• Đại từ nghi vấn:</span> <input type="text" class="ans-input" id="v4-dt" style="width: 120px;">
+          <span>• Mục đích (Hỏi về...):</span> <input type="text" class="ans-input" id="v4-md" style="width: 180px;">
+        </div>
+        <div class="feedback-msg hidden" id="fb-v4"></div>
+      </div>
+
+      <!-- TV Câu 5 -->
+      <div class="question-card" id="card-v5">
+        <div class="q-title">Câu e) "Chúng ta sẽ gặp nhau ở đâu?"[cite: 7]</div>
+        <div class="ans-row">
+          <span>• Đại từ nghi vấn:</span> <input type="text" class="ans-input" id="v5-dt" style="width: 120px;">
+          <span>• Mục đích (Hỏi về...):</span> <input type="text" class="ans-input" id="v5-md" style="width: 180px;">
+        </div>
+        <div class="feedback-msg hidden" id="fb-v5"></div>
+      </div>
+
+      <!-- TV Câu 6 (Bổ sung) -->
+      <div class="question-card" id="card-v6">
+        <div class="q-title">Câu f) "Bao giờ anh đi công tác về?"</div>
+        <div class="ans-row">
+          <span>• Đại từ nghi vấn:</span> <input type="text" class="ans-input" id="v6-dt" style="width: 120px;">
+          <span>• Mục đích (Hỏi về...):</span> <input type="text" class="ans-input" id="v6-md" style="width: 180px;">
+        </div>
+        <div class="feedback-msg hidden" id="fb-v6"></div>
+      </div>
+
+      <!-- TV Câu 7 (Bổ sung) -->
+      <div class="question-card" id="card-v7">
+        <div class="q-title">Câu g) "Cái cặp này giá bao nhiêu tiền?"</div>
+        <div class="ans-row">
+          <span>• Đại từ nghi vấn:</span> <input type="text" class="ans-input" id="v7-dt" style="width: 120px;">
+          <span>• Mục đích (Hỏi về...):</span> <input type="text" class="ans-input" id="v7-md" style="width: 180px;">
+        </div>
+        <div class="feedback-msg hidden" id="fb-v7"></div>
+      </div>
+
+      <!-- TV Câu 8 (Bổ sung) -->
+      <div class="question-card" id="card-v8">
+        <div class="q-title">Câu h) "Tại sao bạn lại nghỉ học hôm nay?"</div>
+        <div class="ans-row">
+          <span>• Đại từ nghi vấn:</span> <input type="text" class="ans-input" id="v8-dt" style="width: 120px;">
+          <span>• Mục đích (Hỏi về...):</span> <input type="text" class="ans-input" id="v8-md" style="width: 180px;">
+        </div>
+        <div class="feedback-msg hidden" id="fb-v8"></div>
+      </div>
+
+      <!-- TV Câu 9 (Bổ sung) -->
+      <div class="question-card" id="card-v9">
+        <div class="q-title">Câu i) "Món quà này gửi cho ai thế?"</div>
+        <div class="ans-row">
+          <span>• Đại từ nghi vấn:</span> <input type="text" class="ans-input" id="v9-dt" style="width: 120px;">
+          <span>• Mục đích (Hỏi về...):</span> <input type="text" class="ans-input" id="v9-md" style="width: 180px;">
+        </div>
+        <div class="feedback-msg hidden" id="fb-v9"></div>
+      </div>
+
+      <!-- TV Câu 10 (Bổ sung) -->
+      <div class="question-card" id="card-v10">
+        <div class="q-title">Câu k) "Chị thích chiếc váy nào hơn?"</div>
+        <div class="ans-row">
+          <span>• Đại từ nghi vấn:</span> <input type="text" class="ans-input" id="v10-dt" style="width: 120px;">
+          <span>• Mục đích (Hỏi về...):</span> <input type="text" class="ans-input" id="v10-md" style="width: 180px;">
+        </div>
+        <div class="feedback-msg hidden" id="fb-v10"></div>
+      </div>
+
+
+      <!-- PHẦN 3: TIẾNG ANH -->
+      <div class="section-header">🔤 PHẦN 3: TIẾNG ANH (Unit 1: All About Me)</div>
+
+      <!-- Anh Câu 1 -->
+      <div class="question-card" id="card-e1">
+        <div class="q-title">Bài 1: Complete the word: a_dr_ss (Địa chỉ)</div>
+        <div class="ans-row">
+          <span>➜ Đáp án từ đầy đủ:</span>
+          <input type="text" class="ans-input" id="e1-ans" style="width: 160px;">
+        </div>
+        <div class="feedback-msg hidden" id="fb-e1"></div>
+      </div>
+
+      <!-- Anh Câu 2 -->
+      <div class="question-card" id="card-e2">
+        <div class="q-title">Bài 2: Unscramble the word: h-o-m-e-t-o-w-n</div>
+        <div class="ans-row">
+          <span>➜ Đáp án từ đúng:</span>
+          <input type="text" class="ans-input" id="e2-ans" style="width: 160px;">
+        </div>
+        <div class="feedback-msg hidden" id="fb-e2"></div>
+      </div>
+
+      <!-- Anh Câu 3 -->
+      <div class="question-card" id="card-e3">
+        <div class="q-title">Bài 3: Choose the correct word: "What's your _________? - It's 56 Nguyen Du Street." (address / name / nationality)</div>
+        <div class="ans-row">
+          <span>➜ Đáp án:</span>
+          <input type="text" class="ans-input" id="e3-ans" style="width: 160px;">
+        </div>
+        <div class="feedback-msg hidden" id="fb-e3"></div>
+      </div>
+
+      <!-- Anh Câu 4 -->
+      <div class="question-card" id="card-e4">
+        <div class="q-title">Bài 4: Fill in the blank: "Where _____ you live?" (do / does / is)</div>
+        <div class="ans-row">
+          <span>➜ Đáp án:</span>
+          <input type="text" class="ans-input" id="e4-ans" style="width: 120px;">
+        </div>
+        <div class="feedback-msg hidden" id="fb-e4"></div>
+      </div>
+
+      <!-- Anh Câu 5 -->
+      <div class="question-card" id="card-e5">
+        <div class="q-title">Bài 5: Reorder words: live / I / Flat 3 / in / on / floor. / the second</div>
+        <div class="ans-row">
+          <span>➜ Viết lại câu hoàn chỉnh:</span>
+          <input type="text" class="ans-input" id="e5-ans" style="width: 380px;">
+        </div>
+        <div class="feedback-msg hidden" id="fb-e5"></div>
+      </div>
+
+      <div style="text-align: center; margin-top: 35px;">
+        <button type="button" class="btn-submit" id="btn-submit-quiz" onclick="submitQuiz()">NỘP BÀI VÀ CHẤM ĐIỂM 🌟</button>
+      </div>
+
+    </form>
+  </div>
+
+</div>
+
+<script>
+  let timerInterval = null;
+  let secondsElapsed = 0;
+
+  function startGame() {
+    let name = document.getElementById('student-name').value.trim();
+    let sClass = document.getElementById('student-class').value.trim();
+
+    if (!name || !sClass) {
+      alert("Học sinh vui lòng điền đầy đủ Họ tên và Lớp!");
+      return;
+    }
+
+    document.getElementById('display-name').innerText = name;
+    document.getElementById('display-class').innerText = sClass;
+
+    document.getElementById('screen-login').classList.add('hidden');
+    document.getElementById('screen-quiz').classList.remove('hidden');
+
+    timerInterval = setInterval(() => {
+      secondsElapsed++;
+      let mins = Math.floor(secondsElapsed / 60);
+      let secs = secondsElapsed % 60;
+      document.getElementById('time-clock').innerText = 
+        (mins < 10 ? "0" + mins : mins) + ":" + (secs < 10 ? "0" + secs : secs);
+    }, 1000);
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function submitQuiz() {
+    if (!confirm("Em có chắc chắn muốn nộp bài để xem điểm không?")) return;
+
+    clearInterval(timerInterval);
+    let correctCount = 0;
+    const TOTAL_QUESTIONS = 25; // 10 Toán + 10 Tiếng Việt + 5 Tiếng Anh
+
+    function checkAnswer(cardId, fbId, isCorrect, correctText) {
+      let card = document.getElementById(cardId);
+      let fb = document.getElementById(fbId);
+      fb.classList.remove('hidden');
+
+      if (isCorrect) {
+        card.classList.add('correct-card');
+        fb.classList.add('feedback-correct');
+        fb.innerHTML = "✅ Chính xác!";
+        return 1;
+      } else {
+        card.classList.add('wrong-card');
+        fb.classList.add('feedback-wrong');
+        fb.innerHTML = "❌ Chưa đúng. Đáp án chuẩn: " + correctText;
+        return 0;
+      }
+    }
+
+    // --- CHẤM TOÁN ---
+    correctCount += checkAnswer('card-m1', 'fb-m1', (document.getElementById('m1-div').value.trim() === '5' && document.getElementById('m1-num').value.trim() === '80'), "Số chia: 5, Tử số mới: 80");
+    correctCount += checkAnswer('card-m2', 'fb-m2', (document.getElementById('m2-div').value.trim() === '2' && document.getElementById('m2-num').value.trim() === '39'), "Số chia: 2, Tử số mới: 39");
+    correctCount += checkAnswer('card-m3', 'fb-m3', (document.getElementById('m3-div').value.trim() === '2' && document.getElementById('m3-num').value.trim() === '10'), "Số chia: 2, Tử số mới: 10");
+    correctCount += checkAnswer('card-m4', 'fb-m4', (document.getElementById('m4-div').value.trim() === '5' && document.getElementById('m4-num').value.trim() === '5'), "Số chia: 5, Tử số mới: 5");
+
+    let m5Val = document.getElementById('m5-ans').value.trim();
+    correctCount += checkAnswer('card-m5', 'fb-m5', (m5Val.includes('2/5') && m5Val.includes('7/12') && m5Val.includes('49/50')), "2/5, 7/12, 49/50");
+
+    correctCount += checkAnswer('card-m6', 'fb-m6', document.getElementById('m6-ans').value.trim() === '1/4', "1/4 (chia cả tử và mẫu cho 4)");
+    correctCount += checkAnswer('card-m7', 'fb-m7', document.getElementById('m7-ans').value.trim() === '5/8', "5/8 (chia cả tử và mẫu cho 3)");
+    correctCount += checkAnswer('card-m8', 'fb-m8', document.getElementById('m8-ans').value.trim() === '8/9', "8/9 (chia cả tử và mẫu cho 2)");
+    correctCount += checkAnswer('card-m9', 'fb-m9', document.getElementById('m9-ans').value.trim() === '11/15', "11/15 (Mẫu số chung là 15: 5/15 + 6/15)");
+    correctCount += checkAnswer('card-m10', 'fb-m10', document.getElementById('m10-ans').value.trim() === '7/12', "7/12 (Mẫu số chung là 12: 10/12 - 3/12)");
+
+    // --- CHẤM TIẾNG VIỆT ---
+    let norm = (str) => str.trim().toLowerCase();
+
+    correctCount += checkAnswer('card-v1', 'fb-v1', (norm(document.getElementById('v1-dt').value) === 'ai' && norm(document.getElementById('v1-md').value).includes('người')), "Đại từ: 'ai' | Mục đích: Hỏi về người");
+    correctCount += checkAnswer('card-v2', 'fb-v2', (norm(document.getElementById('v2-dt').value) === 'sao' && norm(document.getElementById('v2-md').value).includes('lý do')), "Đại từ: 'sao' | Mục đích: Hỏi về nguyên nhân / lý do");
+    correctCount += checkAnswer('card-v3', 'fb-v3', (norm(document.getElementById('v3-dt').value) === 'mấy' && norm(document.getElementById('v3-md').value).includes('số')), "Đại từ: 'mấy' | Mục đích: Hỏi về số lượng");
+    correctCount += checkAnswer('card-v4', 'fb-v4', (norm(document.getElementById('v4-dt').value).includes('khi nào') && norm(document.getElementById('v4-md').value).includes('thời gian')), "Đại từ: 'khi nào' | Mục đích: Hỏi về thời gian");
+    correctCount += checkAnswer('card-v5', 'fb-v5', (norm(document.getElementById('v5-dt').value).includes('ở đâu') && norm(document.getElementById('v5-md').value).includes('địa điểm')), "Đại từ: 'ở đâu' | Mục đích: Hỏi về địa điểm / nơi chốn");
+
+    correctCount += checkAnswer('card-v6', 'fb-v6', (norm(document.getElementById('v6-dt').value).includes('bao giờ') && norm(document.getElementById('v6-md').value).includes('thời gian')), "Đại từ: 'bao giờ' | Mục đích: Hỏi về thời gian");
+    correctCount += checkAnswer('card-v7', 'fb-v7', (norm(document.getElementById('v7-dt').value).includes('bao nhiêu') && norm(document.getElementById('v7-md').value).includes('giá')), "Đại từ: 'bao nhiêu' | Mục đích: Hỏi về số lượng / giá cả");
+    correctCount += checkAnswer('card-v8', 'fb-v8', (norm(document.getElementById('v8-dt').value).includes('tại sao') && norm(document.getElementById('v8-md').value).includes('lý do')), "Đại từ: 'tại sao' | Mục đích: Hỏi về nguyên nhân / lý do");
+    correctCount += checkAnswer('card-v9', 'fb-v9', (norm(document.getElementById('v9-dt').value) === 'ai' && norm(document.getElementById('v9-md').value).includes('người')), "Đại từ: 'ai' | Mục đích: Hỏi về người");
+    correctCount += checkAnswer('card-v10', 'fb-v10', (norm(document.getElementById('v10-dt').value) === 'nào' && norm(document.getElementById('v10-md').value).includes('vật')), "Đại từ: 'nào' | Mục đích: Hỏi về sự vật / lựa chọn");
+
+    // --- CHẤM TIẾNG ANH ---
+    correctCount += checkAnswer('card-e1', 'fb-e1', norm(document.getElementById('e1-ans').value) === 'address', "address");
+    correctCount += checkAnswer('card-e2', 'fb-e2', norm(document.getElementById('e2-ans').value) === 'hometown', "hometown");
+    correctCount += checkAnswer('card-e3', 'fb-e3', norm(document.getElementById('e3-ans').value) === 'address', "address");
+    correctCount += checkAnswer('card-e4', 'fb-e4', norm(document.getElementById('e4-ans').value) === 'do', "do");
+    
+    let e5Val = norm(document.getElementById('e5-ans').value).replace(/\./g, '');
+    correctCount += checkAnswer('card-e5', 'fb-e5', e5Val === 'i live in flat 3 on the second floor', "I live in Flat 3 on the second floor.");
+
+    // Tính điểm trên thang điểm 10
+    let finalScore = ((correctCount / TOTAL_QUESTIONS) * 10).toFixed(1);
+
+    document.getElementById('scoreboard-box').classList.remove('hidden');
+    document.getElementById('res-time').innerText = document.getElementById('time-clock').innerText;
+    document.getElementById('score-total').innerText = finalScore + " / 10 điểm (" + correctCount + "/" + TOTAL_QUESTIONS + " câu đúng)";
+
+    document.getElementById('btn-submit-quiz').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
